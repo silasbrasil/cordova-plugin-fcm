@@ -39,7 +39,9 @@ if (directoryExists("platforms/ios")) {
     if (fileExists( path )) {
       try {
         var contents = fs.readFileSync(path).toString();
-        fs.writeFileSync("platforms/ios/" + name + "/Resources/GoogleService-Info.plist", contents)
+        if(!fileExists("platforms/ios/" + name + "/Resources/GoogleService-Info.plist")) {
+          fs.writeFileSync("platforms/ios/" + name + "/Resources/GoogleService-Info.plist", contents)
+        }
       } catch(err) {
         process.stdout.write(err);
       }
